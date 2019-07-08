@@ -1,7 +1,18 @@
 doctype html
+mixin item(title, url)
+    li
+        a(href=url class=path == url ? 'active': '')=title
 html
-  head
+  head(lang='pl')
+    meta(charset="utf-8")
+    meta(http-equiv='X-UA-Compatible', content='text/html', charset='UTF-8') 
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    ul
+        +item('Strona glowna', '/')
+        +item('Aktualnosci', '/news')
+        +item('Quiz', '/quiz')
+        +item('Admin', '/admin')
+            
     block content
