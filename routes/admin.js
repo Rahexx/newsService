@@ -2,25 +2,26 @@ const express = require('express');
 const News = require('../models/news');
 const router = express.Router();
 
+
 router.all('*', (req, res, next) => {
     if (!req.session.admin) {
         res.redirect('login');
 
         return;
     }
-
     next();
 });
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
     const data = News.find({}, (err, data) => {
-        res.render('admin/index', { title: 'Admin', data });
+        res.render('admin/index', { title: 'Admin', data});
     });
 });
 
 router.get('/news/add', (req, res) => {
-    res.render('admin/news-form', { title: 'Dodaj artykul', body: {}, errors: {} });
+
+    res.render('admin/news-form', { title: 'Dodaj artykul', body: {}, errors: {}});
 });
 
 router.post('/news/add', (req, res) => {
@@ -33,7 +34,7 @@ router.post('/news/add', (req, res) => {
 
     newsData.save((err) => {
         if (err) {
-            res.render('admin/news-form', { title: 'Dodaj artykul', errors, body });
+            res.render('admin/news-form', { title: 'Dodaj artykul', errors, body});
             return;
         }
         res.redirect('/admin')

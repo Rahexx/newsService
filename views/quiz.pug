@@ -1,5 +1,22 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    h1= title
+    if show
+        form(method='post')
+            p W jakim jezyku lubisz programowac
+            ul
+                each item in data
+                    li
+                        label=item.title
+                        input(type='radio' name='quiz' value=item._id)
+            input(type='submit' value='Zaglosuj')
+            p Aby zobaczyc wyniki oddaj glos
+    else
+        h1 Oddales swoj glos w ankiecie
+        p Wyniki
+        ul
+        each item in data
+            li #{item.title} glosow: #{item.vote} (#{(item.vote/sum*100).toFixed(0)}%)
+    p Glosow oddano: #{sum}
+            

@@ -7,7 +7,7 @@ const password = "123";
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Stronie glownej' });
 });
 
 router.get('/login', (req, res, next) => {

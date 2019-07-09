@@ -2,18 +2,28 @@ const express = require('express');
 const router = express.Router();
 const News = require('../models/news');
 
+router.all('*', (req, res, next) => {
+
+    if (!req.session.admin) {
+        res.redirect('login');
+
+        return;
+    }
+
+    next();
+});
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
+    const cookie = req.session.admin;
     const search = req.query.search
     let flag;
 
     if (search) {
         flag = 1;
-        console.log(`Wartoœæ flagi to: ${flag}`)
     }
     else{
         flag = 0;
-        console.log(`Wartoœæ flagi to: ${flag}`)
     }
 
     if (flag == 1) {
@@ -22,7 +32,7 @@ router.get('/', (req, res, next) => {
             .sort({ created: 1 });
 
         findNews.exec((err, data) => {
-            res.render('news', { title: 'News', data });
+            res.render('news', { title: 'News', data});
         });
     }
     else {
@@ -31,7 +41,7 @@ router.get('/', (req, res, next) => {
             .sort({ created: 1 });
 
         findNews.exec((err, data) => {
-            res.render('news', { title: 'News', data });
+            res.render('news', { title: 'News', data});
         });
     }
 
