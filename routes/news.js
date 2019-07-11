@@ -3,8 +3,9 @@ const router = express.Router();
 const News = require('../models/news');
 
 
-/* GET home page. */
+/* GET news page. IF  */
 router.get('/', (req, res, next) => {
+//If the input is empty, change the flag content to 1. If it is empty, set it to 0
     const search = req.query.search
     let flag;
 
@@ -14,6 +15,8 @@ router.get('/', (req, res, next) => {
     else{
         flag = 0;
     }
+//If the flag is set and 1 display associated with the value of input news
+// IF the flag is set and 0 display all news
 
     if (flag == 1) {
          const findNews = News

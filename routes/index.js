@@ -3,17 +3,18 @@ const User = require('../models/user');
 const router = express.Router();
 
 
-//const login ="admin";
-//const password = "123";
-
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Stronie glownej' });
 });
 
+//  Get login page
+
 router.get('/login', (req, res, next) => {
     res.render('login', { title: 'Logowanie' });
 });
+
+//downloading data from the form and checking data in the database
 
 router.post('/login', (req, res, next) => { 
     req.session.admin = 1;
@@ -33,7 +34,7 @@ router.post('/login', (req, res, next) => {
     });
 }); 
 
-
+//Change variable session on 0 and logout admin
 
 router.post('/logout', (req, res, next) => {
     req.session.admin = 0;
